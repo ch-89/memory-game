@@ -9,21 +9,10 @@ let selected = null
 let attempts = ref(0)
 let pairs = 8
 
-// for(let i = 1; i <= pairs; i++) images.push(i, i)
-
-// while(images.length > 0) {
-//   const index = Math.floor(Math.random() * images.length)
-
-//   tiles.value.push({
-//     src: images.splice(index, 1)[0],
-//     flipped: false
-//   })
-// }
-
 for(let i = 1; i <= pairs; i++) {
   tiles.value.push(
-    { id: `tile-${i}-1`, src: i, flipped: true },
-    { id: `tile-${i}-2`, src: i, flipped: true }
+    { id: `${i}-1`, src: i, flipped: true },
+    { id: `${i}-2`, src: i, flipped: true }
   )
 }
 
@@ -86,16 +75,8 @@ const flip = tile => {
 </script>
 
 <template>
-  <!-- <div class="grid place-items-center h-screen">
-    <div class="max-w-xl grid grid-cols-4 gap-4">
-      <button v-for="tile in tiles" @click="flip(tile)" :disabled="tile.flipped || disabled">
-        <img :src="`/images/${tile.flipped ? tile.src : 0}.png`">
-      </button>
-    </div>
-  </div> -->
-
   <div class="grid place-items-center h-screen">
-    <div class="max-w-xl grid grid-cols-4 gap-4">
+    <div class="max-w-xl grid grid-cols-4 gap-4 select-none">
       <TransitionGroup>
         <div v-for="tile in tiles" :key="tile.id" class="card transition-transform duration-500">
           <button @click="flip(tile)" :disabled="tile.flipped || disabled" :class="{ flipped: tile.flipped }" class="card-content transition-transform duration-1000">
